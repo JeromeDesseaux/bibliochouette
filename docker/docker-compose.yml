@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      dockerfile: ./docker/dev/Dockerfile
+      context: ../
+    image: bibliochouetteapi:latest
+    restart: always
+    links:
+      - db
+    ports:
+      - 8000:8000
+    networks:
+      - backend
+    volumes:
+      - type: bind
+        source: ..
+        target: /app
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=bibliochouette
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - backend
+  blackd:
+    restart: always
+    image: docker.io/pyfound/black
+    command: blackd --bind-host 0.0.0.0 --bind-port 45484
+    ports:
+      - "45484:45484"
+networks:
+  backend:
+volumes:
+  db:
+    driver: local

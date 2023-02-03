@@ -1,0 +1,10 @@
+*.sqlite3
+
+# VIRTUAL ENVIRONMENT STUFF
+venv
+env
+.env
+.venv
+
+# MAC OS FILE SYSTEM
+.DS_Store
