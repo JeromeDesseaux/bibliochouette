@@ -37,6 +37,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    groups = models.ManyToManyField("holders.HolderGroup")
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

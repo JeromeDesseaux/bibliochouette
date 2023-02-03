@@ -6,6 +6,10 @@ services:
       dockerfile: ./docker/dev/Dockerfile
       context: ../
     image: bibliochouetteapi:latest
+    env_file:
+      - ../.env
+    environment:
+      - ENV=development
     restart: always
     links:
       - db
