@@ -7,6 +7,7 @@ import datetime
 
 # Create your models here.
 class Library(AuditableEntity):
+    label = models.CharField("label", max_length=32, null=False, blank=False)
     group = models.ForeignKey(
         "holders.HolderGroup", on_delete=models.CASCADE, null=False, blank=False
     )
