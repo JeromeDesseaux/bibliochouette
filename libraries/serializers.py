@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from holders.models import HolderGroup
+from users.models import User
 from .models import Library, Reader, Loan, BookGenre, Book
 
 
@@ -29,7 +30,10 @@ class LoanSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     library = serializers.PrimaryKeyRelatedField(queryset=Library.objects.all())
-    genre = serializers.PrimaryKeyRelatedField(queryset=BookGenre.objects.all())
+    genre = serializers.PrimaryKeyRelatedField(
+        queryset=BookGenre.objects.all(), required=False
+    )
+    owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Book
@@ -43,10 +47,13 @@ class BookSerializer(serializers.ModelSerializer):
             "pageCount",
             "publicationDate",
             "title",
+            "owner",
         ]
 
 
 class BookGenreSerializer(serializers.ModelSerializer):
+    created_by = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
     class Meta:
         model = BookGenre
-        fields = ["id", "label"]
+        fields = ["id", "label", "created_by"]

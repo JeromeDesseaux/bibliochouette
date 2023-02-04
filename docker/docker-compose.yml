@@ -6,8 +6,6 @@ services:
       dockerfile: ./docker/dev/Dockerfile
       context: ../
     image: bibliochouetteapi:latest
-    env_file:
-      - ../.env
     environment:
       - ENV=development
     restart: always
@@ -25,8 +23,9 @@ services:
     image: postgres:alpine
     restart: always
     environment:
-      - POSTGRES_USER=bibliochouette
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=${DB_USER:?err}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:?err}
+      - POSTGRES_DB=${DB_NAME:?err}
     ports:
       - '5432:5432'
     volumes: 
