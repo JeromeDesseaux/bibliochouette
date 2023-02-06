@@ -48,6 +48,9 @@ class User(AbstractBaseUser):
 
     objects = UserProfileManager()
 
+    class Meta:
+        db_table = "users"
+
     def get_full_name(self):
         return self.email
 

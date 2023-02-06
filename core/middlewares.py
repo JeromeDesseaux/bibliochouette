@@ -12,6 +12,7 @@ class CurrentUserMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
+    @staticmethod
     def process_request(self, request):
         _user.value = request.user
 

@@ -12,6 +12,9 @@ class Library(AuditableEntity):
         "holders.HolderGroup", on_delete=models.CASCADE, null=False, blank=False
     )
 
+    class Meta:
+        db_table = "libraries"
+
 
 class Reader(AuditableEntity):
     firstname = models.CharField("firstname", max_length=32, null=True, blank=True)
@@ -25,6 +28,9 @@ class Reader(AuditableEntity):
         if not (self.firstname and self.lastname) or self.surname:
             raise ValidationError("You must at least provide a surname.")
 
+    class Meta:
+        db_table = "readers"
+
 
 class Loan(AuditableEntity):
     book = models.ForeignKey("Book", on_delete=models.CASCADE)
@@ -36,11 +42,15 @@ class Loan(AuditableEntity):
 
     class Meta:
         ordering = ["-expected_return_date"]
+        db_table = "loans"
 
 
 class BookGenre(models.Model):
     label = models.CharField("label", max_length=42)
     created_by = models.ForeignKey("users.User", on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "book_genres"
 
 
 class Book(AuditableEntity):
@@ -51,6 +61,9 @@ class Book(AuditableEntity):
     author = models.CharField("author", max_length=255)
     description = models.TextField(null=True, blank=True)
     isbn = models.CharField("isbn", max_length=14)
-    pageCount = models.SmallIntegerField(default=0)
-    publicationDate = models.DateField(null=True, blank=True)
+    page_count = models.SmallIntegerField(default=0)
+    publication_date = models.DateField(null=True, blank=True)
     title = models.CharField("title", max_length=42)
+
+    class Meta:
+        db_table = "books"

@@ -11,6 +11,9 @@ class HolderGroup(AuditableEntity):
     )
     readers = models.ManyToManyField("libraries.Reader")
 
+    class Meta:
+        db_table = "groups"
+
 
 class Holder(AuditableEntity):
     class HolderType(models.TextChoices):
@@ -23,3 +26,6 @@ class Holder(AuditableEntity):
         max_length=2, choices=HolderType.choices, default=HolderType.SCHOOL
     )
     name = models.CharField("name", max_length=24, null=False, blank=False)
+
+    class Meta:
+        db_table = "holders"
