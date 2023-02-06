@@ -48,7 +48,6 @@ class Book(AuditableEntity):
     genre = models.ForeignKey(
         BookGenre, on_delete=models.CASCADE, null=True, blank=True
     )
-    owner = models.ForeignKey("users.User", on_delete=models.CASCADE)
     author = models.CharField("author", max_length=255)
     description = models.TextField(null=True, blank=True)
     isbn = models.CharField("isbn", max_length=14)

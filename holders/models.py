@@ -10,7 +10,6 @@ class HolderGroup(AuditableEntity):
         "Holder", null=True, blank=True, on_delete=models.CASCADE
     )
     readers = models.ManyToManyField("libraries.Reader")
-    admin = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
 
 class Holder(AuditableEntity):
