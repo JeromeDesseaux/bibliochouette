@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import permissions
 
+from core.mixins import AuditableOwnerFilterMixin
 from holders.models import Holder, HolderGroup
 from holders.serializers import HolderSerializer, HolderGroupSerializer
 
@@ -12,7 +13,7 @@ class HolderViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class HolderGroupViewSet(viewsets.ModelViewSet):
-    queryset = HolderGroup.objects.all().order_by("-created_at")
+class HolderGroupViewSet(AuditableOwnerFilterMixin, viewsets.ModelViewSet):
+    queryset = HolderGroup.objects.all()
     serializer_class = HolderGroupSerializer
     permission_classes = [permissions.IsAuthenticated]

@@ -44,16 +44,14 @@ class BookSerializer(serializers.ModelSerializer):
             "author",
             "description",
             "isbn",
-            "pageCount",
-            "publicationDate",
+            "page_count",
+            "publication_date",
             "title",
             "owner",
         ]
 
 
 class BookGenreSerializer(serializers.ModelSerializer):
-    created_by = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-
     class Meta:
         model = BookGenre
-        fields = ["id", "label", "created_by"]
+        fields = ["id", "label"]

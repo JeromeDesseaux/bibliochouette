@@ -45,9 +45,8 @@ class Loan(AuditableEntity):
         db_table = "loans"
 
 
-class BookGenre(models.Model):
+class BookGenre(AuditableEntity):
     label = models.CharField("label", max_length=42)
-    created_by = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
     class Meta:
         db_table = "book_genres"
