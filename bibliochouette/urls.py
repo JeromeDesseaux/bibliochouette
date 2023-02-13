@@ -28,6 +28,10 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("users.urls")),
+    path(
+        r"api/auth/password_reset/",
+        include("django_rest_passwordreset.urls", namespace="password_reset"),
+    ),
     path("api/holders/", include(holder_router.urls)),
     path("api/libraries/", include(library_router.urls)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),

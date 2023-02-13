@@ -1,10 +1,4 @@
-class AuditableOwnerFilterMixin:
-    def get_queryset(self):
-        qs = super(AuditableOwnerFilterMixin, self).get_queryset()
-        return qs.filter(created_by=self.request.user)
-
-
-class OwnershipMixin:
+class AuditableOwnershipMixin:
     def _set_ownership(self, serializer, is_edit: bool = False):
         current_user = self.request.user
         if is_edit:
@@ -17,3 +11,7 @@ class OwnershipMixin:
 
     def perform_update(self, serializer):
         self._set_ownership(serializer, is_edit=True)
+
+    def get_queryset(self):
+        qs = super(AuditableOwnershipMixin, self).get_queryset()
+        return qs.filter(created_by=self.request.user)

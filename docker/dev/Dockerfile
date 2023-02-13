@@ -1,13 +1,17 @@
 FROM python:slim-bullseye
 
 ENV PYTHONUNBUFFERED=true
+
 WORKDIR /app
 
-RUN apt-get update && apt-get -y install build-essential libpq-dev python3-dev
+RUN apt-get update && apt-get -y install build-essential libpq-dev python3-dev curl
 
-COPY requirements.txt .
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+COPY poetry.lock pyproject.toml /app/
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-EXPOSE 8000
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
+RUN poetry install
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
