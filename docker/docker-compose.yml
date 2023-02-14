@@ -3,7 +3,7 @@ version: '3.8'
 services:
   api:
     build:
-      dockerfile: ./docker/dev/Dockerfile
+      dockerfile: docker/dev/backend.Dockerfile
       context: ../
     image: bibliochouetteapi:latest
     command: "sleep infinity"
@@ -18,8 +18,26 @@ services:
       - backend
     volumes:
       - type: bind
-        source: ..
+        source: ../backend
         target: /app
+  frontend:
+    build:
+      dockerfile: docker/dev/frontend.Dockerfile
+      context: ../
+    image: bibliochouettefrontend:latest
+    command: "sleep infinity"
+    environment:
+      - NODE_ENV=development
+    restart: always
+    links:
+      - api
+    ports:
+      - 3000:3000
+    networks:
+      - backend
+    volumes:
+      - ../frontend:/app
+      - exclude:/app/node_modules/
   db:
     image: postgres:alpine
     restart: always
@@ -44,3 +62,4 @@ networks:
 volumes:
   db:
     driver: local
+  exclude:

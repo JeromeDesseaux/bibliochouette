@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y install build-essential libpq-dev python3-dev c
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-COPY poetry.lock pyproject.toml /app/
+COPY backend/poetry.lock backend/pyproject.toml /app/
 RUN pip install --upgrade pip
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
