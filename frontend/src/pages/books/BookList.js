@@ -1,7 +1,7 @@
+import {NoItemError} from "../../components/errors/NoItemError";
+
 export const BookList = () => {
     return (
-        <div>
-            Hello book list
-        </div>
+        <NoItemError itemName="livre" />
     )
 }

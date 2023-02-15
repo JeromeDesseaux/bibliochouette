@@ -7,11 +7,12 @@ import {UnloggedOnlyRoute} from "./auth/UnloggedOnlyRoute";
 import {BookList} from "../pages/books/BookList";
 import {GroupList} from "../pages/groups/GroupList";
 import {LoanList} from "../pages/loans/LoanList";
+import {NotFoundPage} from "../pages/errors/NotFound";
 
 export const AppRouter = () => {
     return (
         <Routes>
-            <Route index element={<Login/>}/>
+            <Route path='*' element={<NotFoundPage />}/>
             <Route element={<UnloggedOnlyRoute/>}>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
