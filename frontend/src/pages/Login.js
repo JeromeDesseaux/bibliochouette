@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {React, useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,9 +10,13 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Copyright from '../components/Copyright';
+import {AuthContext} from "../utils/auth/AuthProvider";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Login() {
+    const {login} = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -20,6 +24,8 @@ export default function Login() {
             email: data.get('email'),
             password: data.get('password'),
         });
+        login();
+        navigate("/dashboard")
     };
 
     return (
