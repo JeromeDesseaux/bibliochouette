@@ -5,22 +5,23 @@ import ListItemText from '@mui/material/ListItemText';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import  BookIcon from '@mui/icons-material/Book';
 import PeopleIcon from '@mui/icons-material/People';
+import {Link} from "react-router-dom"
 
 export const mainListItems = (
     <React.Fragment>
-        <ListItemButton>
+        <ListItemButton component={Link} to="/dashboard">
             <ListItemIcon>
                 <BookIcon/>
             </ListItemIcon>
             <ListItemText primary="Livres"/>
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton component={Link} to="/dashboard/groups">
             <ListItemIcon>
                 <PeopleIcon/>
             </ListItemIcon>
             <ListItemText primary="Groupes"/>
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton component={Link} to="/dashboard/loans">
             <ListItemIcon>
                 <ShoppingCartIcon/>
             </ListItemIcon>

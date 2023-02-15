@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import {createTheme, styled, ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -9,14 +9,14 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
 import {mainListItems} from './navigation/ListItems';
 import Copyright from '../components/Copyright';
-
+import {AuthContext} from "../utils/auth/AuthProvider";
+import {Outlet} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -68,6 +68,8 @@ const mdTheme = createTheme();
 
 function LayoutContent() {
     const [open, setOpen] = React.useState(true);
+    const {logout} = useContext(AuthContext);
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -103,10 +105,8 @@ function LayoutContent() {
                         >
                             Dashboard
                         </Typography>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon/>
-                            </Badge>
+                        <IconButton color="inherit" onClick={() => logout()}>
+                            <LogoutIcon/>
                         </IconButton>
                     </Toolbar>
                 </AppBar>
@@ -142,7 +142,7 @@ function LayoutContent() {
                 >
                     <Toolbar/>
                     <Container maxWidth="lg" sx={{mt: 4, mb: 4}}>
-                        Hello World
+                        <Outlet />
                         <Copyright sx={{pt: 4}}/>
                     </Container>
                 </Box>
@@ -151,6 +151,6 @@ function LayoutContent() {
     );
 }
 
-export default function Layout() {
+export default function DashboardLayout() {
     return <LayoutContent/>;
 }

@@ -5,6 +5,8 @@ export const AuthContext = createContext({
     isLoading: true,
     login: () => {
     },
+    logout: () => {
+    }
 });
 
 export const AuthProvider = props => {
@@ -23,8 +25,13 @@ export const AuthProvider = props => {
         }))
     };
 
+    const logout = () => {
+        localStorage.removeItem("tokens");
+        window.location.reload(false);
+    }
+
     return (
-        <AuthContext.Provider value={{isAuthenticated, isLoading, login}}>
+        <AuthContext.Provider value={{isAuthenticated, isLoading, login, logout}}>
             {props.children}
         </AuthContext.Provider>
     )

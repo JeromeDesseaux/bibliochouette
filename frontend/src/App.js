@@ -10,13 +10,13 @@ const theme = createTheme()
 function App() {
     return (
         <React.StrictMode>
-            <AuthProvider>
-                <ThemeProvider theme={theme}>
-                    <BrowserRouter>
+            <BrowserRouter>
+                <AuthProvider>
+                    <ThemeProvider theme={theme}>
                         <AppRouter/>
-                    </BrowserRouter>
-                </ThemeProvider>
-            </AuthProvider>
+                    </ThemeProvider>
+                </AuthProvider>
+            </BrowserRouter>
         </React.StrictMode>
     );
 }

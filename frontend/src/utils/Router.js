@@ -2,8 +2,11 @@ import {Route, Routes} from "react-router-dom"
 import {ProtectedRoute} from "./auth/ProtectedRoute";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Layout from "../components/Layout";
+import DashboardLayout from "../components/DashboardLayout";
 import {UnloggedOnlyRoute} from "./auth/UnloggedOnlyRoute";
+import {BookList} from "../pages/books/BookList";
+import {GroupList} from "../pages/groups/GroupList";
+import {LoanList} from "../pages/loans/LoanList";
 
 export const AppRouter = () => {
     return (
@@ -14,15 +17,19 @@ export const AppRouter = () => {
                 <Route path='/register' element={<Register/>}/>
             </Route>
             <Route element={<ProtectedRoute/>}>
-                <Route
-                    path="/dashboard"
-                >
+                <Route element={<DashboardLayout/>}>
                     <Route
-                        index
-                        element={(
-                            <Layout/>
-                        )}
-                    />
+                        path="/dashboard"
+                    >
+                        <Route
+                            index
+                            element={(
+                                <BookList/>
+                            )}
+                        />
+                        <Route path="/dashboard/groups" element={<GroupList/>}></Route>
+                        <Route path="/dashboard/loans" element={<LoanList/>}></Route>
+                    </Route>
                 </Route>
             </Route>
         </Routes>
