@@ -8,6 +8,8 @@ import {BookList} from "../pages/books/BookList";
 import {GroupList} from "../pages/groups/GroupList";
 import {LoanList} from "../pages/loans/LoanList";
 import {NotFoundPage} from "../pages/errors/NotFound";
+import {AddBook} from "../pages/books/AddBook";
+import {EditBook} from "../pages/books/EditBook";
 
 export const AppRouter = () => {
     return (
@@ -31,6 +33,8 @@ export const AppRouter = () => {
                         <Route path="/dashboard/groups" element={<GroupList/>}></Route>
                         <Route path="/dashboard/loans" element={<LoanList/>}></Route>
                     </Route>
+                    <Route path="/book/add" element={<AddBook/>}></Route>
+                    <Route path="/book/edit" element={<EditBook/>}></Route>
                 </Route>
             </Route>
         </Routes>
