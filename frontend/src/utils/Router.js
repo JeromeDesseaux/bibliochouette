@@ -10,6 +10,7 @@ import {LoanList} from "../pages/loans/LoanList";
 import {NotFoundPage} from "../pages/errors/NotFound";
 import {AddBook} from "../pages/books/AddBook";
 import {EditBook} from "../pages/books/EditBook";
+import {LoginFirebase} from "../pages/firebase/LoginFirebase";
 
 export const AppRouter = () => {
     return (
@@ -35,6 +36,7 @@ export const AppRouter = () => {
                     </Route>
                     <Route path="/book/add" element={<AddBook/>}></Route>
                     <Route path="/book/edit" element={<EditBook/>}></Route>
+                    <Route path="/firebase/login" element={<LoginFirebase/>}></Route>
                 </Route>
             </Route>
         </Routes>
