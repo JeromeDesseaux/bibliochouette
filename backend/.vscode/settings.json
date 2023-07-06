@@ -1,0 +1,10 @@
+{
+    "python.linting.enabled": true,
+    "djangointellisense.projectRoot": "/app",
+    "djangointellisense.debugMessages": true,
+    "djangointellisense.settingsModule": "bibliochouette.settings",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
+}
